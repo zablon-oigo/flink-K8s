@@ -1,0 +1,12 @@
+akhq:
+  connections:
+    kafka-cluster:
+      properties:
+        bootstrap.servers: "kafka:9092"
+
+server:
+  port: 8080
+
+service:
+  type: NodePort
+  port: 8080
