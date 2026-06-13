@@ -1,0 +1,18 @@
+controller:
+  replicaCount: 1
+
+broker:
+  replicaCount: 1
+
+kraft:
+  enabled: true
+
+listeners:
+  client:
+    protocol: PLAINTEXT
+
+service:
+  type: ClusterIP
+
+metrics:
+  enabled: false
