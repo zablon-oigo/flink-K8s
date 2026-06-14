@@ -1,0 +1,14 @@
+rootUser: admin
+rootPassword: password
+
+mode: standalone
+
+persistence:
+  enabled: false
+
+service:
+  type: ClusterIP
+
+buckets:
+  - name: demo
+    policy: none
