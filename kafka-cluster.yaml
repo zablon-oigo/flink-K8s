@@ -17,6 +17,16 @@ spec:
         port: 9094
         type: nodeport
         tls: false
+        configuration:
+          bootstrap:
+            nodePort: 32092
+          brokers:
+            - broker: 0
+              nodePort: 32090
+            - broker: 1
+              nodePort: 32091
+            - broker: 2
+              nodePort: 32093
 
       - name: tls
         port: 9093
