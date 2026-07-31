@@ -1,0 +1,28 @@
+---
+apiVersion: flink.apache.org/v1beta1
+kind: FlinkDeployment
+metadata:
+  name: flink-session-filter
+  namespace: flink
+spec:
+  image: zablondev/flink-job:latest
+  imagePullPolicy: Always
+
+  flinkVersion: v1_20
+  serviceAccount: flink
+
+  service:
+    type: NodePort
+
+  flinkConfiguration:
+    taskmanager.numberOfTaskSlots: "2"
+
+  jobManager:
+    resource:
+      memory: "2048m"
+      cpu: 0.5
+
+  taskManager:
+    resource:
+      memory: "2048m"
+      cpu: 0.5
