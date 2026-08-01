@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 
 public class HighValuePurchaseFilter {
 
-    private static final String BROKER_URL = "kafka:9092";
+    private static final String BROKER_URL = "localhost:32092";
 
     public static void main(String[] args) throws Exception {
 

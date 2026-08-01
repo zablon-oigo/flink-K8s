@@ -16,7 +16,7 @@ import tools.jackson.databind.ObjectMapper;
 import net.datafaker.Faker;
 
 public class App {
-        private static final String BOOTSTRAP = "localhost:29092";
+        private static final String BOOTSTRAP = "localhost:32092";
     private static final String TOPIC = "sales-raw";
 
     public static void main(String[] args) {
