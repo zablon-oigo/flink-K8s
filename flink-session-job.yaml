@@ -12,3 +12,19 @@ spec:
     entryClass: org.example.KafkaHighValuePurchaseFilterJob
     parallelism: 2
     upgradeMode: stateless
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flink-rest-nodeport
+  namespace: flink
+spec:
+  type: NodePort
+  selector:
+    app: flink-session-filter
+    component: jobmanager
+  ports:
+    - port: 8081
+      targetPort: 8081
+      nodePort: 32097
+
