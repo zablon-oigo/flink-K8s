@@ -1,4 +1,3 @@
----
 apiVersion: flink.apache.org/v1beta1
 kind: FlinkDeployment
 metadata:
@@ -10,9 +9,6 @@ spec:
 
   flinkVersion: v1_20
   serviceAccount: flink
-
-  service:
-    type: NodePort
 
   flinkConfiguration:
     taskmanager.numberOfTaskSlots: "2"
