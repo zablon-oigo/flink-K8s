@@ -11,6 +11,9 @@
 ![Helm](https://img.shields.io/badge/Helm-v3-0F1689?logo=helm&logoColor=white)
 
 
+This project demonstrates how deploy a cloud-native, real-time data streaming pipeline on Kubernetes using Apache Flink, Apache Kafka, and MinIO. It showcases event-driven stream processing by ingesting sales events from Kafka, applying real-time filtering logic to identify high-value purchases, and publishing the processed results to a separate Kafka topic.
+
+
 #### Architecture Diagram
 
 <img width="654" height="418" alt="filter excalidraw" src="https://github.com/user-attachments/assets/cfb8730d-1131-4dc7-913b-e2f15e577d3f" />
@@ -28,6 +31,7 @@ Install the following tools before getting started:
 - Maven
 - Git
 
+#### Project Setup
 
 Create the Kubernetes Cluster
 
@@ -46,7 +50,7 @@ Create the Namespace
 kubectl create namespace flink
 ```
 
-Install the Strimzi Kafka Operator
+Install Strimzi Kafka Operator
 ```sh
 curl -L https://github.com/strimzi/strimzi-kafka-operator/releases/download/1.1.0/strimzi-cluster-operator-1.1.0.yaml \
   | sed 's/namespace: myproject/namespace: flink/g' \
@@ -78,14 +82,24 @@ Create Kafka Topic
 kubectl apply -f kafka-topic.yaml -n flink
 ```
 
-Install cert-manager
-
+Verify kafka topic exist
 ```sh
 kubectl exec -it -n flink my-cluster-broker-0 -- \
 bin/kafka-topics.sh \
 --bootstrap-server localhost:9092 \
 --list
 ```
+
+Kafka Web UI
+```sh
+kubectl apply -f akhq-config.yaml -n flink
+```
+Open Kafka UI (AKHQ):
+```sh
+http://localhost:32096/
+```
+
+Install cert-manager
 
 ```sh
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.18.2/cert-manager.yaml
@@ -104,3 +118,46 @@ helm upgrade --install flink-kubernetes-operator \
   --create-namespace
 ```
 
+Deploy MinIO
+```sh
+kubectl apply -f minio -n flink
+```
+
+Open Minio Console
+```sh
+http://localhost:32095/
+```
+
+
+Verify:
+
+```sh
+kubectl get svc -n flink
+```
+
+Upload the Flink Job
+Build the project:
+```sh
+mvn clean package -DskipTests
+```
+Upload the generated JAR into the test bucket in MinIO.
+
+Deploy the Flink Session Cluster
+
+```sh
+kubectl apply -f flink-deployment.yaml
+```
+
+Submit Flink Job
+
+```sh
+kubectl apply -f flink-session-job.yaml
+```
+Verify:
+```sh
+kubectl describe flinksessionjob flink-session-job -n flink
+```
+Open Flink Web UI:
+```sh
+http://localhost:32097/
+```
