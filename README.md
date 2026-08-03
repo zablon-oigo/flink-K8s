@@ -140,7 +140,7 @@ Build the project:
 ```sh
 mvn clean package -DskipTests
 ```
-Upload the generated JAR into the test bucket in MinIO.
+>Upload the generated JAR into the test bucket in MinIO.
 
 Deploy the Flink Session Cluster
 
