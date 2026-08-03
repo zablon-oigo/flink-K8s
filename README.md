@@ -13,6 +13,7 @@
 
 #### Architecture Diagram
 
+<img width="654" height="418" alt="filter excalidraw" src="https://github.com/user-attachments/assets/cfb8730d-1131-4dc7-913b-e2f15e577d3f" />
 
 
 #### Prerequisites
